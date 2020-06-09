@@ -1,0 +1,267 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+}
+
+#container {
+  min-height: 100%;
+  padding-bottom: 100px; /*this is the height of the footer*/
+}
+
+#main {
+  overflow: auto; /*this will give us the scroll bars when more content is on the page*/
+}
+
+.header {
+  width: 100%;
+  height: 80px;
+  display: block; /*What's the function of display block?*/
+  background-color: #000000; 
+}
+
+.inner-header {
+  width: 1000px;
+  height: 100%;
+  display: block; /*What's the function of display block?*/
+  margin: 0 auto;
+  color: #ffffff;
+}
+
+.logo-container {
+ height: 100%;
+  display: table; /*What's the function of display table?*/
+  float: left;
+
+}
+
+.logo {
+  height: 100%;
+  display: table-cell; /*What's the function of display table-cell?*/
+  vertical-align: middle;
+}
+
+.nav {
+  height: 100%;
+  float: right;
+}
+
+.nav a {
+  height: 100%;
+  display: table;
+  float: left;
+  padding: 0px 20px; /*first is horizontal (which is 0 bc we already centered it) then vertical(
+                       is 20 because we want space between the words*/
+}
+
+/*
+.nav a: last-child {
+  padding-right: 0;
+} 
+*/
+
+.nav a li {
+  display: table-cell;
+  vertical-align: middle; /*positions the words in the middle vertically*/
+  color: #ffffff;
+  font-family: 'Montserrat';
+  font-size: 16px;
+}
+
+.row1 {
+  padding: 12px;
+  vertical-align: middle;
+  min-height: 300px;
+}
+
+.box1 {
+  max-width: 390px;
+  margin-left: 0;
+  margin-right: 10px;
+  /*background: #f9f9f9;*/
+  font-size: 14px;
+  padding: 7.5px;
+  text-align: center;
+  float: left; /*allows for divs to be placed next to each other horizontally*/
+  /*background: red;*/
+  box-shadow: 5px 5px 5px; /*left, right, blur*/
+
+}
+
+.box2 {
+  max-width: 390px;
+  margin-left: 10px;
+  margin-right: 10px;
+  /*background: #f9f9f9;*/
+  font-size: 14px;
+  padding: 7.5px;
+  text-align: center;
+  float: left;
+  /*background: blue;*/
+}
+
+.Welcome-header-container {
+  height: 400px;
+  width: 100%;
+  z-index: 4;
+}   
+
+.Welcome-header {
+  float: right;
+  padding-right: 60px;
+}
+
+.Welcome-header p {
+  font-size: 150px;
+  font-family: rz-regular, Arial, Helvetica, sans-serif;
+}
+
+.row2 {
+  clear: both;
+  padding: 12px;
+  vertical-align: middle;
+}
+
+.video-small {
+float: left;
+margin-right: 40px;
+box-shadow: 5px 5px 5px;
+}
+
+.box4 {
+  max-width: 390px;
+  margin-left: 40px;
+  margin-right: 0;
+  /*background: #f9f9f9;*/
+  font-size: 25px;
+  padding: 7.5px;
+  padding-top: 20px;
+  text-align: center;
+  float: right;
+  /*background: red;*/
+}
+
+.row3 {
+  clear: both;
+  padding: 12px;
+  vertical-align: middle;
+}
+
+.box5 {
+  max-width: 780px;
+  margin-left: 10px;
+  margin-right: 0;
+  /*background: #f9f9f9;*/
+  font-size: 14px;
+  padding: 7.5px;
+  text-align: center;
+  float: left;
+  /*background: blue;*/
+}
+
+.video-small2 {
+  max-width: 390px;
+  margin-left: 0px;
+  margin-right: 0;
+  /*background: #f9f9f9;*/
+  font-size: 14px;
+  padding: 0px;
+  text-align: center;
+  float: right;
+  /*background: blue;*/
+}
+
+.row4 {
+  clear: both;
+  padding: 12px;
+  vertical-align: middle;
+}
+
+.box-photo1 {
+  margin-left: 0;
+  margin-right: 10px;
+  /*background: #f9f9f9;*/
+  padding: 7.5px;
+  padding-left: 30px;
+  padding-right: 100px;
+  float: left; /*allows for divs to be placed next to each other horizontally*/
+  /*background: red;*/
+
+}
+
+.inner-photo1 {
+  box-shadow: 5px 5px 5px; /*left, right, blur*/
+}
+
+.box-photo2 {
+  margin-left: 0;
+  margin-right: 10px;
+  /*background: #f9f9f9;*/
+  padding: 7.5px;
+  padding-left:185px;
+  padding-right: 100px;
+  float: left; /*allows for divs to be placed next to each other horizontally*/
+  /*background: red;*/
+
+}
+
+.inner-photo2 {
+  box-shadow: 5px 5px 5px;
+}
+
+.box-photo3 {
+  margin-left: 0;
+  margin-right: 10px;
+  /*background: #f9f9f9;*/
+  padding: 7.5px;
+  padding-left:100px;
+  padding-right: 30px;
+  float: right; /*allows for divs to be placed next to each other horizontally*/
+  /*background: red;*/
+}
+
+.inner-photo3 {
+  box-shadow: 5px 5px 5px;
+}
+
+/*.parallax {
+   background: url("Clinton's Scholarship Video.mp4") no-repeat center;
+  background-size: cover;
+  background-attachment: fixed;
+  height: 500px;*/
+
+.background-video {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: -100;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+#footer {
+  height: 100px;
+  /*z-index: 19;*/
+  /*min-width: 100%;*/
+  background-color: #000000;
+  position: relative;
+  margin-top: -100px; /*this is negative because we set the height of the container to 100px, so
+                       it is pushing the footer below the view of the window.  Therefore, we need
+                       to make it negative in order for the footer to be visible.*/
+  clear: both;
+  color: #ffffff;
+
+}
+
+p {
+  letter-spacing: 1px;
+  text-align: center;
+  color: #000000;
+}
+
