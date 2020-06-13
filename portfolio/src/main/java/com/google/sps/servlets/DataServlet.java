@@ -19,14 +19,55 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import com.google.gson.Gson;
+import java.lang.String;
+
 
 /** Servlet that returns some example content. TODO: modify this file to handle comments data */
-@WebServlet("/data")
+// @WebServlet("/name")
+// public class DataServlet extends HttpServlet {
+
+// ArrayList<String> numList = new ArrayList<>();
+
+//   @Override
+//   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+//     numList.add("1");
+//     numList.add("2");
+//     numList.add("3");
+//     response.setContentType("text/html;");
+//     response.getWriter().println(convertToJsonUsingGson(numList));
+//   }
+
+//   private String convertToJsonUsingGson(ArrayList<String> numList) {
+//     Gson gson = new Gson();
+//     String json = gson.toJson(numList);
+//     return json;
+//   }
+
+
+// }
+
+@WebServlet("/receive-email")
 public class DataServlet extends HttpServlet {
 
-  @Override
-  public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    response.setContentType("text/html;");
-    response.getWriter().println("<h1>Hello Elias!</h1>");
+    ArrayList<String> emails = new ArrayList<>();
+
+    @Override
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+        // Get the input from the form.
+        String email = getEmail(request);
+        emails.add(email);
+
+        // Redirect back to the HTML page.
+        response.sendRedirect("/index.html");
+  }
+
+  /** Returns the choice entered by the player, or -1 if the choice was invalid. */
+  private String getEmail(HttpServletRequest request) {
+    // Get the input from the form.
+    String userEmail = request.getParameter("user-email");
+    return userEmail;
   }
 }
