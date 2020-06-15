@@ -22,7 +22,13 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import com.google.gson.Gson;
 import java.lang.String;
+import com.google.appengine.api.datastore.DatastoreService;
+import com.google.appengine.api.datastore.DatastoreServiceFactory;
+import com.google.appengine.api.datastore.Entity;
 
+
+//The example below is for step 3.  Since these are all in one file, and I can't have multiple servlets, 
+//I just commented out the servlet "/name" from step 3 so I could make "/receive-email" from step 4
 
 /** Servlet that returns some example content. TODO: modify this file to handle comments data */
 // @WebServlet("/name")
@@ -58,16 +64,29 @@ public class DataServlet extends HttpServlet {
 
         // Get the input from the form.
         String email = getEmail(request);
-        emails.add(email);
+        emails.add(email); //arraylist
+
+        String emailAddress = request.getParameter("emailAddress");
+
+        Entity emailEntity = new Entity("emailAddress");
+        emailEntity.setProperty("email", emailAddress);
+
+        DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+        datastore.put(emailEntity);
+
+        response.sendRedirect("/index.html");
 
         // Redirect back to the HTML page.
         response.sendRedirect("/index.html");
-  }
 
-  /** Returns the choice entered by the player, or -1 if the choice was invalid. */
-  private String getEmail(HttpServletRequest request) {
-    // Get the input from the form.
-    String userEmail = request.getParameter("user-email");
-    return userEmail;
-  }
+ 
+    }
+
+    /** Returns the user's email */
+    private String getEmail(HttpServletRequest request) {
+        // Get the input from the form.
+        String userEmail = request.getParameter("user-email");
+        return userEmail;
+    }
+
 }
