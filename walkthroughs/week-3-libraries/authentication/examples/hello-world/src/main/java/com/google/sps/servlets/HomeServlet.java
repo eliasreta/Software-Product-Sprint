@@ -29,15 +29,15 @@ public class HomeServlet extends HttpServlet {
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     response.setContentType("text/html");
 
-    UserService userService = UserServiceFactory.getUserService();
-    if (userService.isUserLoggedIn()) {
-      String userEmail = userService.getCurrentUser().getEmail();
+    UserService userService = UserServiceFactory.getUserService(); //I think this gets the user's login info
+    if (userService.isUserLoggedIn()) { //checks whether the user is logged in
+      String userEmail = userService.getCurrentUser().getEmail(); //get's user's email address
       String urlToRedirectToAfterUserLogsOut = "/";
-      String logoutUrl = userService.createLogoutURL(urlToRedirectToAfterUserLogsOut);
-
+      String logoutUrl = userService.createLogoutURL(urlToRedirectToAfterUserLogsOut); //get's a logout url
+      //turns the user's email and logout url into html
       response.getWriter().println("<p>Hello " + userEmail + "!</p>");
       response.getWriter().println("<p>Logout <a href=\"" + logoutUrl + "\">here</a>.</p>");
-    } else {
+    } else { //if they aren't logged in, it gets a login url, and turns it into html
       String urlToRedirectToAfterUserLogsIn = "/";
       String loginUrl = userService.createLoginURL(urlToRedirectToAfterUserLogsIn);
 
