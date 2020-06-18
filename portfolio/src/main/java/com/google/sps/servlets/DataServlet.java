@@ -54,39 +54,56 @@ import com.google.appengine.api.datastore.Entity;
 
 // }
 
-@WebServlet("/receive-email")
-public class DataServlet extends HttpServlet {
+//steps 4 and 5
+// @WebServlet("/receive-email")
+// public class DataServlet extends HttpServlet {
 
-    ArrayList<String> emails = new ArrayList<>();
+//     ArrayList<String> emails = new ArrayList<>();
 
-    @Override
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+//     @Override
+//     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-        // Get the input from the form.
-        String email = getEmail(request);
-        emails.add(email); //arraylist
+//         // Get the input from the form.
+//         String email = getEmail(request);
+//         emails.add(email); //arraylist
 
-        String emailAddress = request.getParameter("emailAddress");
+//         String emailAddress = request.getParameter("emailAddress");
 
-        Entity emailEntity = new Entity("emailAddress");
-        emailEntity.setProperty("email", emailAddress);
+//         Entity emailEntity = new Entity("emailAddress");
+//         emailEntity.setProperty("email", emailAddress);
 
-        DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-        datastore.put(emailEntity);
+//         DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+//         datastore.put(emailEntity);
 
-        response.sendRedirect("/index.html");
+//         response.sendRedirect("/index.html");
 
-        // Redirect back to the HTML page.
-        response.sendRedirect("/index.html");
+//         // Redirect back to the HTML page.
+//         response.sendRedirect("/index.html");
 
  
+//     }
+
+//     /** Returns the user's email */
+//     private String getEmail(HttpServletRequest request) {
+//         // Get the input from the form.
+//         String userEmail = request.getParameter("user-email");
+//         return userEmail;
+//     }
+
+// }
+
+@WebServlet("/login-status")
+public class DataServlet extends HttpServlet { //class
+    @Override
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        if (userService.isUserLoggedIn()) { //function
+            loginStatus("logged in");
+        } else {
+            loginStatus("not logged in");
+        }
     }
 
-    /** Returns the user's email */
-    private String getEmail(HttpServletRequest request) {
-        // Get the input from the form.
-        String userEmail = request.getParameter("user-email");
-        return userEmail;
+    private String loginStatus(status) { //function
+        return status;
     }
-
 }
