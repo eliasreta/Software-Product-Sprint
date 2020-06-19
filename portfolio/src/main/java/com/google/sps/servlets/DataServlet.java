@@ -29,85 +29,22 @@ import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 
 
-//The example below is for step 3.  Since these are all in one file, and I can't have multiple servlets, 
-//I just commented out the servlet "/name" from step 3 so I could make "/receive-email" from step 4
-
-/** Servlet that returns some example content. TODO: modify this file to handle comments data */
-// @WebServlet("/name")
-// public class DataServlet extends HttpServlet {
-
-// ArrayList<String> numList = new ArrayList<>();
-
-//   @Override
-//   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-//     numList.add("1");
-//     numList.add("2");
-//     numList.add("3");
-//     response.setContentType("text/html;");
-//     response.getWriter().println(convertToJsonUsingGson(numList));
-//   }
-
-//   private String convertToJsonUsingGson(ArrayList<String> numList) {
-//     Gson gson = new Gson();
-//     String json = gson.toJson(numList);
-//     return json;
-//   }
-
-
-// }
-
-//steps 4 and 5
-// @WebServlet("/receive-email")
-// public class DataServlet extends HttpServlet {
-
-//     ArrayList<String> emails = new ArrayList<>();
-
-//     @Override
-//     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
-//         // Get the input from the form.
-//         String email = getEmail(request);
-//         emails.add(email); //arraylist
-
-//         String emailAddress = request.getParameter("emailAddress");
-
-//         Entity emailEntity = new Entity("emailAddress");
-//         emailEntity.setProperty("email", emailAddress);
-
-//         DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-//         datastore.put(emailEntity);
-
-//         response.sendRedirect("/index.html");
-
-//         // Redirect back to the HTML page.
-//         response.sendRedirect("/index.html");
-
- 
-//     }
-
-//     /** Returns the user's email */
-//     private String getEmail(HttpServletRequest request) {
-//         // Get the input from the form.
-//         String userEmail = request.getParameter("user-email");
-//         return userEmail;
-//     }
-
-// }
-
 @WebServlet("/login-status")
 public class DataServlet extends HttpServlet { //class
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
         UserService userService = UserServiceFactory.getUserService();
-            response.setContentType("text/html");
+            response.setContentType("text/html;");
         if (userService.isUserLoggedIn()) { //function
-            response.getWriter().println("<p> Logged in </p>");
-            // Get the input from the form.
-            String text = getParameter(request, "text-input", ""); //this contains the user's email we got from the html form tag
+            response.getWriter().println("Logged in");
+            String userEmail = userService.getCurrentUser().getEmail(); //get's user's email address
             //^we unhid the comments section
             String urlToRedirectToAfterUserLogsOut = "/login-status";
             String logoutUrl = userService.createLogoutURL(urlToRedirectToAfterUserLogsOut);
+            response.getWriter().println("<p>Hello " + userEmail + "!</p>");
+            response.getWriter().println("<p>To navigate to the comments page, click <a href= \"UserInput.html\">here</a></p>");
+            response.getWriter().println("<p>Logout <a href=\"" + logoutUrl + "\">here</a>.</p>");
         } else {
             response.getWriter().println("<p> Not logged in </p>");
             String urlToRedirectToAfterUserLogsIn = "/";
@@ -125,18 +62,23 @@ public class DataServlet extends HttpServlet { //class
     }
     return value;
   }
-}
-//     @Override
-//     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-//         if !(userService.isUserLoggedIn()) { //checks if the user isn't logged in
-//             String userEmail = userService.getCurrentUser().getEmail();
-//         } else {
-//             // Get the input from the form.
-//             String text = getParameter(request, "text-input", ""); //this contains the user's email we got from the html form tag
-//             //^this right here is a comment
-//         }
+
+  @Override
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException { //use post when storing info from the user
+    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+        UserService userService = UserServiceFactory.getUserService();
+        if (!(userService.isUserLoggedIn())) { //checks if the user isn't logged in
+            String userEmail = userService.getCurrentUser().getEmail();
+        } else {
+            // Get the input from the form.
+            String text = getParameter(request, "text-input", ""); //this contains the user's email we got from the html form tag
+            //^this right here is a comment
+        }
+        response.getWriter().println("HI IM PAULL");
     
-// }
+    }
+}
+    
 
 
     
