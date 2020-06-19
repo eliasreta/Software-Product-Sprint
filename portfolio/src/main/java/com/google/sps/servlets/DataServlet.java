@@ -25,6 +25,8 @@ import java.lang.String;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
 
 
 //The example below is for step 3.  Since these are all in one file, and I can't have multiple servlets, 
@@ -95,15 +97,47 @@ import com.google.appengine.api.datastore.Entity;
 @WebServlet("/login-status")
 public class DataServlet extends HttpServlet { //class
     @Override
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+        UserService userService = UserServiceFactory.getUserService();
+            response.setContentType("text/html");
         if (userService.isUserLoggedIn()) { //function
-            loginStatus("logged in");
+            response.getWriter().println("<p> Logged in </p>");
+            // Get the input from the form.
+            String text = getParameter(request, "text-input", ""); //this contains the user's email we got from the html form tag
+            //^we unhid the comments section
+            String urlToRedirectToAfterUserLogsOut = "/login-status";
+            String logoutUrl = userService.createLogoutURL(urlToRedirectToAfterUserLogsOut);
         } else {
-            loginStatus("not logged in");
+            response.getWriter().println("<p> Not logged in </p>");
+            String urlToRedirectToAfterUserLogsIn = "/";
+            String loginUrl = userService.createLoginURL(urlToRedirectToAfterUserLogsIn);
+            response.getWriter().println("<p>Login <a href=\"" + loginUrl + "\">here</a>.</p>");
+            // String loginInfo = request.getParameter("login-status");
+            // String id = userService.getCurrentUser().getUserId();//has the user log in
         }
     }
 
-    private String loginStatus(status) { //function
-        return status;
+    private String getParameter(HttpServletRequest request, String name, String defaultValue) {
+    String value = request.getParameter(name);
+    if (value == null) {
+      return defaultValue;
     }
+    return value;
+  }
 }
+//     @Override
+//     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+//         if !(userService.isUserLoggedIn()) { //checks if the user isn't logged in
+//             String userEmail = userService.getCurrentUser().getEmail();
+//         } else {
+//             // Get the input from the form.
+//             String text = getParameter(request, "text-input", ""); //this contains the user's email we got from the html form tag
+//             //^this right here is a comment
+//         }
+    
+// }
+
+
+    
+    

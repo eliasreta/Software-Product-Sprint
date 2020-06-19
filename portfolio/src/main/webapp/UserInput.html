@@ -5,7 +5,7 @@
     <meta charset="utf-8"/>
     <link rel="stylesheet" type="text/css" href="AboutPage.css">
 </head>
-    <body onload="getEmail()">
+    <!-- <body onload="getEmail()">
 
     <ul id="history"></ul>
     <h1 id="total"></h1>
@@ -20,5 +20,15 @@
     </form>
 
     </div>
+    </body> -->
+    <body onload = getUserLoginInfo()>
+     <form action="/text" method="POST">
+        <!--here, the user sends a value to the server-->
+        <p>Say Something:</p>
+        <textarea name="text-input"><!--one, two, three--></textarea>
+        <br/><br/>
+        <input type="submit" />
+        <ul id="come-back"></ul>
+    </form>
     </body>
 </html>

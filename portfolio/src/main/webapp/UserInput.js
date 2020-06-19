@@ -18,3 +18,14 @@ function getServerStats() {
   const statsListElement = document.getElementById('num-list-container');
   }
 }
+
+function getUserLoginInfo() {
+      const loginInfoPromise = fetch('/login-status');
+      loginInfoPromise.then((response) => {
+        if (response == "Logged in") {
+            document.getElementById('come-back');
+        } else {
+            document.getElementById('come-back');//here i want to direct the user to a login page
+        }
+    })
+}

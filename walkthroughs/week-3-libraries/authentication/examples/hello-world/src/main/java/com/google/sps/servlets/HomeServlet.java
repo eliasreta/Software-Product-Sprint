@@ -32,7 +32,7 @@ public class HomeServlet extends HttpServlet {
     UserService userService = UserServiceFactory.getUserService(); //I think this gets the user's login info
     if (userService.isUserLoggedIn()) { //checks whether the user is logged in
       String userEmail = userService.getCurrentUser().getEmail(); //get's user's email address
-      String urlToRedirectToAfterUserLogsOut = "/";
+      String urlToRedirectToAfterUserLogsOut = "/"; //why is this the server name and not a url?
       String logoutUrl = userService.createLogoutURL(urlToRedirectToAfterUserLogsOut); //get's a logout url
       //turns the user's email and logout url into html
       response.getWriter().println("<p>Hello " + userEmail + "!</p>");
