@@ -4,8 +4,9 @@
     <title>About</title>
     <meta charset="utf-8"/>
     <link rel="stylesheet" type="text/css" href="AboutPage.css">
+    <script src="UserInput.js"></script>
 </head>
-    <body onload="getEmail()">
+    <!-- <body onload="getEmail()">
 
     <ul id="history"></ul>
     <h1 id="total"></h1>
@@ -20,5 +21,15 @@
     </form>
 
     </div>
+    </body> -->
+    <body onload = getUserLoginInfo()>
+     <form action="/login-status" method="POST"> <!-- this will navigate to our 'login status' server and find the doPost method -->
+        <!--here, the user sends a value to the server-->
+        <p>Say Something:</p>
+        <textarea name="text-input">Add your comment here</textarea>
+        <br/><br/>
+        <input type="submit" />
+        <ul id="come-back"></ul>
+    </form>
     </body>
 </html>
