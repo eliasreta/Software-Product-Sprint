@@ -59,6 +59,8 @@ public final class FindMeetingQueryTest {
   @Test
   public void optionsForNoAttendees() {
     MeetingRequest request = new MeetingRequest(NO_ATTENDEES, DURATION_1_HOUR);
+    //request, which is passed into FindMeetingQuery, has attributes 'name', 
+    //'meeting duration in minutes, and # of attendees 
 
     Collection<TimeRange> actual = query.query(NO_EVENTS, request);
     Collection<TimeRange> expected = Arrays.asList(TimeRange.WHOLE_DAY);
