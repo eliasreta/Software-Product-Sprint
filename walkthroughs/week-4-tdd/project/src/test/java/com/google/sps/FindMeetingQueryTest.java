@@ -59,6 +59,8 @@ public final class FindMeetingQueryTest {
   @Test
   public void optionsForNoAttendees() {
     MeetingRequest request = new MeetingRequest(NO_ATTENDEES, DURATION_1_HOUR);
+    //request, which is passed into FindMeetingQuery, has attributes 'name', 
+    //'meeting duration in minutes, and # of attendees 
 
     Collection<TimeRange> actual = query.query(NO_EVENTS, request);
     Collection<TimeRange> expected = Arrays.asList(TimeRange.WHOLE_DAY);
@@ -111,6 +113,7 @@ public final class FindMeetingQueryTest {
 
     MeetingRequest request =
         new MeetingRequest(Arrays.asList(PERSON_A, PERSON_B), DURATION_30_MINUTES);
+        //are this person a and b the same as in Event 1 and Event 2?
 
     Collection<TimeRange> actual = query.query(events, request);
     Collection<TimeRange> expected =
@@ -118,6 +121,13 @@ public final class FindMeetingQueryTest {
             TimeRange.fromStartEnd(TIME_0830AM, TIME_0900AM, false),
             TimeRange.fromStartEnd(TIME_0930AM, TimeRange.END_OF_DAY, true));
 
+    //so basically, in this test, we already have 2 events lined up in the calendar: one from 8-8:30
+    //and one from 9-9:30.  Two people have requested a meeting time - each of them for 30 minutes.  
+    //They want me to return a List of TimeRanges where no events are happening, which in the example
+    //case, is from the beginning of the day until 8, from 8:30 - 9, and from 9:30 until the end
+    //of the day
+
+    //one way is to create an array of all the events
     Assert.assertEquals(expected, actual);
   }
 
